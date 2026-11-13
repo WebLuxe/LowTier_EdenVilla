@@ -270,7 +270,7 @@ window.SITE = {
       checkDates: "Vedi le date", pickDatesFirst: "Scegli prima le date nel calendario.", estTotal: "Prezzo indicativo",
       calTitle: "Scegli le date", calPickIn: "Tocca il giorno di arrivo", calPickOut: "Ora tocca il giorno di partenza (min. {n} notti)", calFree: "Libero", calBooked: "Completo",
       calClear: "Cancella date", calDone: "Fatto", calMin: "Da questo giorno il soggiorno minimo è di {n} notti.", calClash: "Alcune di queste notti sono al completo.",
-      sendRequest: "Invia richiesta", askWa: "Chiedi su WhatsApp", noPayNow: "Nessun pagamento adesso: prima confermiamo la disponibilità.",
+      continue: "Continua", changeDates: "Cambia date", sendRequest: "Invia richiesta", askWa: "Chiedi su WhatsApp", noPayNow: "Nessun pagamento adesso: prima confermiamo la disponibilità.",
       waIntro: "Ciao {name}, avete una camera libera per queste date?", bookSubject: "Richiesta di disponibilità dal sito {name}",
     },
     en: {
@@ -302,7 +302,7 @@ window.SITE = {
       checkDates: "Check dates", pickDatesFirst: "Please choose your dates in the calendar first.", estTotal: "Estimated price",
       calTitle: "Choose your dates", calPickIn: "Tap your check-in day", calPickOut: "Now tap your check-out day (min. {n} nights)", calFree: "Available", calBooked: "Full",
       calClear: "Clear dates", calDone: "Done", calMin: "From this day the minimum stay is {n} nights.", calClash: "Some of those nights are full.",
-      sendRequest: "Send request", askWa: "Ask on WhatsApp", noPayNow: "No payment now. We confirm availability first.",
+      continue: "Continue", changeDates: "Change dates", sendRequest: "Send request", askWa: "Ask on WhatsApp", noPayNow: "No payment now. We confirm availability first.",
       waIntro: "Hello {name}, do you have a room for these dates?", bookSubject: "Availability request from the {name} website",
     },
   },

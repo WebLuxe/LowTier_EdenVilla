@@ -307,6 +307,33 @@ html.intro-on .hero-rise, html.intro-on .phead-in > * { animation-play-state: pa
 html { overflow-x: clip; }
 .ticker { contain: paint; }
 
+/* ---------- one swipe, one section (home page) ---------- */
+html.snap { scroll-padding-top: 0; }
+@media (pointer: coarse), (max-width: 759px) { html.snap.snap-on { scroll-snap-type: y mandatory; } }
+html.snap .snap-pt { scroll-snap-align: start; scroll-snap-stop: always; scroll-margin-top: 61px; }
+html.snap .snap-end { scroll-snap-align: end; scroll-snap-stop: always; }
+html.snap .snap-mark { position: absolute; left: 0; width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start; scroll-snap-stop: always; }
+html.snap main > .hero { min-height: calc(100svh - var(--hero-top, 0px) - var(--strip, 0px)) !important; }
+html.snap main > :not(.hero)[style*="--strip"] { min-height: calc(var(--screen, 100svh) - var(--strip)) !important; }
+html.snap .snap-hide { display: none !important; }
+
+/* ---------- phones: lists one at a time, with buttons ---------- */
+.pg-nav { display: none; }
+@media (max-width: 759px) {
+  [data-pg] { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-auto-flow: row !important; grid-auto-columns: auto !important; overflow: visible !important; margin-inline: 0 !important; padding-inline: 0 !important; scroll-snap-type: none !important; }
+  [data-pg] > :not(.pg-on) { display: none !important; }
+  [data-pg] > .pg-on { animation: pg-in .45s var(--ease-out, ease) both; opacity: 1; transform: none; }
+  .pg-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 12px; }
+  .pg-b { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); background: var(--card, transparent); color: var(--text); }
+  .pg-b:active { transform: scale(.94); }
+  .pg-n { min-width: 4.5ch; text-align: center; font-weight: 600; font-size: .9rem; color: var(--text-2); font-variant-numeric: tabular-nums; }
+}
+@keyframes pg-in { from { opacity: 0; translate: 0 10px; } }
+/* the header keeps one height on a snapping page, so nothing below it shifts while scrolling */
+html.snap { --hd-h: 60px; }
+/* lists that no longer scroll sideways must not leave snap points in the page */
+@media (max-width: 759px) { html.snap :is(.gal-grid, .rev-grid, .notes, .vc-grid, .near-grid, [data-pg]) > * { scroll-snap-align: none !important; } }
+
 /* ---------- availability calendar (shared, added with @uses cal) ---------- */
 .cal { --cal-sel: var(--primary); --on-cal-sel: var(--on-primary); display: grid; gap: var(--s2); min-width: 0; }
 :root[data-theme="dark"] .cal { --cal-sel: var(--accent); --on-cal-sel: var(--on-accent); }
@@ -563,3 +590,193 @@ html.past-hero:not(.at-book) .m-bar { transform: none; }
 
 /* score out of 10 */
 .rev-score > b i { font-style: normal; font-size: .45em; opacity: .7; margin-left: 2px; }
+
+/* =====================================================================
+   ONE SECTION PER SCREEN: every section fills the screen, its content
+   centred and fitting inside; long lists become swipe rows on phones.
+   ===================================================================== */
+:root { --screen: calc(100svh - 61px); }
+main > .sec { min-height: var(--screen); display: flex; flex-direction: column; justify-content: center; padding-block: clamp(28px, 6svh, 72px); }
+main > .sec > .wrap { width: min(100% - 2 * var(--gut), var(--wrap)); }
+.sec-head { margin-bottom: clamp(16px, 3.5svh, 44px); gap: 10px; }
+.hero-photo { min-height: min(100svh, 940px); }
+/* swipe rows (phones): one card at a time, the next one peeking in */
+@media (max-width: 759px) {
+  .swipe-x, .gal-grid, .rev-grid, .notes { display: grid !important; grid-auto-flow: column; grid-template-columns: none !important; grid-auto-columns: 84%; gap: 12px !important; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 4px var(--gut) 8px; scroll-padding-inline: var(--gut); }
+  .gal-grid::-webkit-scrollbar, .rev-grid::-webkit-scrollbar, .notes::-webkit-scrollbar { display: none; }
+  .gal-grid > *, .rev-grid > *, .notes > * { scroll-snap-align: start; }
+  .gal-it, .gal-big { aspect-ratio: 4 / 5; grid-column: auto !important; grid-row: auto !important; }
+  .h2 { font-size: clamp(1.7rem, 7.4vw, 2.1rem); }
+  .lead { font-size: 1rem; }
+  /* the villa: short photo, the four numbers in one row */
+  .about-in { gap: var(--s3); }
+  .about-p { font-size: .97rem; }
+  .about-img { aspect-ratio: 16 / 8; }
+  .glance { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .glance > div { grid-template-columns: 1fr; grid-template-areas: "i" "dd" "dt"; justify-items: center; text-align: center; padding: 10px 4px; row-gap: 2px; }
+  .glance .i { width: 20px; height: 20px; }
+  .glance dd { font-size: 1.05rem; }
+  .glance dt { font-size: .68rem; line-height: 1.2; }
+  /* comforts: two compact columns */
+  .amen-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .amen-grid li { padding: 8px 10px; gap: 8px; font-size: .84rem; line-height: 1.25; }
+  .amen-ic { width: 30px; height: 30px; }
+  .amen-ic .i { width: 16px; height: 16px; }
+  /* rates: compact table, the notes swipe */
+  .rates-in { gap: var(--s3); }
+  .rate-t th, .rate-t td { padding: 10px 4px; }
+  .rate-inc { font-size: .88rem; }
+  .notes li { padding: var(--s2); }
+  /* reviews */
+  .rev-score > b { font-size: 2.6rem; }
+  /* booking: no step list (the two steps show it) */
+  .book-steps { display: none; }
+  .book-top { margin-bottom: var(--s2); }
+  /* location: facts as 2 x 2 tiles, a short map */
+  .loc-facts { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: var(--s2); }
+  .loc-facts li { padding: 12px; }
+  .loc-facts b { font-size: 1.25rem; }
+  .loc-facts span { font-size: .82rem; }
+  .ci-card { padding: var(--s2); gap: var(--s2); }
+  .ci-list { gap: 10px; }
+  .ci-ic { width: 40px; height: 40px; }
+  .loc-map { min-height: 180px; }
+  .faq-list summary { min-height: 52px; font-size: .95rem; }
+}
+/* computers: the gallery is one big photo and four small ones in one screen */
+@media (min-width: 760px) {
+  .gal-grid { grid-template-rows: repeat(2, minmax(0, calc((var(--screen) - 240px) / 2))); }
+  .gal-it { aspect-ratio: auto; }
+  .notes { margin-top: 0 !important; }
+  .about-img { aspect-ratio: auto; height: min(46svh, 440px); }
+  .loc-map { min-height: min(38svh, 340px); }
+  .loc-facts { margin-bottom: var(--s3); }
+}
+/* the booking in two steps: 1 dates and price, 2 your details */
+.bk-s1, .bk-s2 { display: grid; gap: var(--s2); }
+.book-in[data-bstep="1"] .bk-s2, .book-in[data-bstep="2"] .bk-s1, .book-in[data-bstep="2"] .cal-card { display: none; }
+.book-in[data-bstep="2"] { grid-template-columns: minmax(0, 680px); justify-content: center; }
+.bk-back { display: inline-flex; align-items: center; gap: 4px; justify-self: start; min-height: 40px; font-weight: 650; color: var(--text-2); }
+.bk-back:hover { color: var(--text); }
+.bk-s2 textarea { min-height: 96px; }
+.bk-form { gap: var(--s2); align-content: start; }
+/* phones: the last three sections tightened to one screen */
+@media (max-width: 759px) {
+  .rates .sec-head .lead, .book .sec-head .lead, .loc .sec-head .lead { font-size: .92rem; line-height: 1.45; }
+  .book .sec-head .lead { display: none; }
+  .rate-card { padding: 14px 16px; }
+  .rate-t thead { display: none; }
+  .rate-t th, .rate-t td { padding: 9px 2px; }
+  .rate-t td { text-align: right; }
+  .rate-t td b { font-size: 1.1rem; }
+  .rate-t small { font-size: .78rem; }
+  .rate-inc { margin-top: 10px; padding-top: 10px; font-size: .82rem; }
+  .notes li { grid-template-columns: auto 1fr; padding: 12px 14px; gap: 12px; }
+  .notes-ic { width: 36px; height: 36px; }
+  .notes .h3 { font-size: 1.05rem; }
+  .notes p { font-size: .86rem; }
+  /* booking step 1: calendar, then guests and Continue on one row */
+  .cal-card { padding: 12px; }
+  .cal-d { min-height: 38px; }
+  .cal-msg { min-height: 2.4em; font-size: .9rem; }
+  .bk-form { padding: 16px; box-shadow: var(--shadow); }
+  .book-in[data-bstep="1"] .bk-form > .h3 { display: none; }
+  .book-in[data-bstep="1"] .bk-form > .form-note { display: none; }
+  .bk-s1 { grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px; }
+  .bk-s1 .btn { min-height: 52px; padding-inline: 18px; }
+  .bk-dates, .bk-empty { min-height: 0; }
+  .bk-empty { min-height: 48px; padding: 8px 12px; font-size: .9rem; }
+  .bk-sum { padding: 10px 12px; gap: 6px; }
+  .bk-est b { font-size: 1.3rem; }
+  .book-in { gap: 12px; }
+  /* location: slim fact tiles, contact list without repeated labels, no map placeholder */
+  .loc-facts li { grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px; row-gap: 0; padding: 10px 12px; align-items: center; }
+  .loc-facts .i { grid-row: 1 / 3; margin: 0; width: 22px; height: 22px; }
+  .loc-facts b { font-size: 1.05rem; line-height: 1.2; }
+  .loc-facts span { font-size: .76rem; line-height: 1.25; }
+  .ci-list b { display: none; }
+  .ci-list li { gap: 12px; }
+  .ci-ic { width: 36px; height: 36px; }
+  .ci-ic .i { width: 18px; height: 18px; }
+  .ci-list a { font-size: .95rem; }
+  .loc-map { display: none; }
+}
+@media (max-width: 759px) {
+  main > .sec { padding-block: 22px; }
+  .sec-head { margin-bottom: 14px; gap: 6px; }
+  .about-img { aspect-ratio: 16 / 7; }
+  .about-copy { gap: 10px; }
+  .about-p { font-size: .94rem; line-height: 1.5; }
+  .about-host { margin-top: 0; font-size: 1.02rem; }
+  .rate-t th, .rate-t td { padding: 7px 2px; }
+  .cal-d { min-height: 36px; }
+  .cal-top { gap: 4px; }
+  .cal-nav { width: 38px; height: 38px; }
+  .cal-ms .cal-t { margin-bottom: 4px; }
+}
+/* phones: the bottom bar (price, WhatsApp, dates) never covers the end of a section */
+@media (max-width: 959px) { main > .sec { padding-bottom: 92px; } main > .book { padding-bottom: 22px; } }
+
+/* small and short computer screens: the booking and location still fit one screen */
+@media (min-width: 900px) { .book-in[data-bstep="1"] { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+@media (min-width: 900px) and (max-width: 1199px) { .book-in[data-bstep="1"] .cal-ms { grid-template-columns: minmax(0, 1fr); } .book-in[data-bstep="1"] .cal-ms > :nth-child(n + 2) { display: none; } }
+@media (min-width: 760px) and (max-height: 860px) {
+  .cal-d { min-height: 34px; }
+  .cal-card, .bk-form { padding: var(--s2); }
+  .book .sec-head .lead { display: none; }
+  .loc-map { min-height: min(24svh, 220px); }
+  .loc-facts { margin-bottom: var(--s2); }
+  .loc .sec-head .lead { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .loc .sec-head { margin-bottom: var(--s2); }
+}
+@media (min-width: 960px) and (max-height: 860px) {
+  .ci-card { padding: var(--s3); gap: var(--s2); }
+  .ci-list { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+  .ci-ic { width: 40px; height: 40px; }
+  .ci-list li { gap: 12px; }
+  .loc-facts li { padding: 14px 18px; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; }
+  .loc-facts .i { grid-row: span 2; margin: 0; }
+  .loc-facts b { font-size: 1.35rem; }
+  .loc-in { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 760px) and (max-height: 860px) {
+  .rate-card { padding: var(--s3); }
+  .rate-t th, .rate-t td { padding-block: 8px; }
+  .rate-inc { margin-top: 10px; padding-top: 10px; }
+  .notes li { padding-block: 12px; }
+  .rates .sec-head { margin-bottom: var(--s2); }
+}
+
+/* phones: no sideways swiping - the gallery is a grid, reviews and notes go one at a time */
+@media (max-width: 759px) {
+  .gal-grid { display: grid !important; grid-auto-flow: row; grid-template-columns: 1fr 1fr !important; grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin-inline: 0; padding: 0; gap: 8px !important; }
+  .gal-it { aspect-ratio: 4 / 3; grid-column: auto !important; grid-row: auto !important; }
+  .gal-big { grid-column: 1 / -1 !important; aspect-ratio: 16 / 9; }
+  .notes li { min-height: 0; }
+}
+/* phones: hero and rates each fit one screen exactly */
+@media (max-width: 759px) {
+  body[data-page="home"] .hero-facts { display: none; }
+  .hero-photo .h1 { font-size: clamp(2.2rem, 10vw, 2.6rem); }
+  .rates .sec-head .lead { display: none; }
+  .rate-t th, .rate-t td { padding-block: 7px; }
+  .rate-card { padding: 12px 14px; }
+  .rate-inc { margin-top: 8px; padding-top: 8px; font-size: .8rem; }
+  .notes li { padding: 10px 12px; }
+  .notes p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pg-nav { margin-top: 8px; }
+  .pg-b { width: 40px; height: 40px; }
+}
+@media (max-width: 759px) {
+  .rates { padding-bottom: 84px !important; }
+  .notes li { padding: 8px 12px; }
+  .notes .h3 { font-size: 1rem; }
+  .about-img { aspect-ratio: 16 / 7; }
+  .about-p { font-size: .93rem; line-height: 1.5; }
+}
+@media (max-width: 759px) {
+  .about-p { font-size: .9rem; line-height: 1.45; }
+  .about-in { gap: 12px; }
+  .rates .h2 { font-size: clamp(1.6rem, 7vw, 1.9rem); }
+  .notes p { -webkit-line-clamp: 1; }
+}
