@@ -309,7 +309,7 @@ html { overflow-x: clip; }
 
 /* ---------- one swipe, one section (home page) ---------- */
 html.snap { scroll-padding-top: 0; }
-@media (pointer: coarse), (max-width: 759px) { html.snap.snap-on { scroll-snap-type: y mandatory; } }
+@media (max-width: 759px) and (pointer: fine) { html.snap.snap-on { scroll-snap-type: y proximity; } }
 html.snap .snap-pt { scroll-snap-align: start; scroll-snap-stop: always; scroll-margin-top: 61px; }
 html.snap .snap-end { scroll-snap-align: end; scroll-snap-stop: always; }
 html.snap .snap-mark { position: absolute; left: 0; width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start; scroll-snap-stop: always; }

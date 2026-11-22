@@ -630,7 +630,8 @@ const docTop = (el) => { let y = 0; for (; el; el = el.offsetParent) y += el.off
 function snapPages() {
   const root = document.documentElement;
   const page = document.body.dataset.page || 'home';
-  const on = page !== '404' && !reduced && T.snap !== false && (C.effects || {}).snap !== false;
+  // Touch screens scroll freely: forced snapping fought the finger and jumped whenever the address bar or a photo resized the page.
+  const on = page !== '404' && !reduced && !matchMedia('(pointer: coarse)').matches && T.snap !== false && (C.effects || {}).snap !== false;
   root.classList.toggle('snap', on);
   if (snapRO) { snapRO.disconnect(); snapRO = null; }
   if (!on) return;
