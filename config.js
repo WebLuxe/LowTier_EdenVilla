@@ -45,7 +45,7 @@ window.SITE = {
   /* ---------- 3. Contact details (from edentourltd.com) ---------- */
   contact: {
     phone: "+39 347 844 2855",
-    whatsapp: "393478442855",   // CONFIRM: the old site lists this as a phone number only; check it has WhatsApp
+    whatsapp: "23057425328",   // +230 5742 5328, the WhatsApp number on the Eden Villa Facebook page
     whatsappMessage: { it: "Ciao Eden Villa, vorrei informazioni per un soggiorno.", en: "Hello Eden Villa, I would like to ask about a stay." },
     email: "edentourltd@yahoo.com",
     responseTime: { it: "Ti rispondiamo in italiano, inglese, tedesco, spagnolo o francese.", en: "We reply in Italian, English, German, Spanish or French." },
@@ -158,6 +158,16 @@ window.SITE = {
         img("assets/photos/eden-restaurant.jpg", { it: "Il ristorante sotto il tetto in legno", en: "The restaurant under the timber roof" }),
         img("assets/photos/eden-twin-room.jpg", { it: "Camera con due letti", en: "Twin room" }),
         img("assets/photos/eden-pool-terrace.jpg", { it: "Lettini a bordo piscina", en: "Sun loungers by the pool" }),
+        img("assets/photos/eden-pool-parasol.jpg", { it: "La terrazza sulla piscina", en: "The terrace by the pool" }),
+        img("assets/photos/eden-welcome-drinks.jpg", { it: "Aperitivo di benvenuto a bordo piscina", en: "Welcome drinks by the pool" }),
+        img("assets/photos/eden-lagoon-palm.jpg", { it: "La laguna di Belle Mare, a pochi minuti a piedi", en: "The Belle Mare lagoon, a few minutes' walk away" }),
+        img("assets/photos/eden-lagoon-trees.jpg", { it: "Filao e palme sulla spiaggia di Belle Mare", en: "Filao trees and palms on Belle Mare beach" }),
+        img("assets/photos/eden-awards.jpg", { it: "I nostri riconoscimenti TripAdvisor e Booking.com", en: "Our TripAdvisor and Booking.com awards" }),
+        img("assets/photos/eden-restaurant-diners.jpg", { it: "Cena nel ristorante accanto alla piscina", en: "Dinner in the restaurant by the pool" }),
+        img("assets/photos/eden-seafood-platter.jpg", { it: "Piatto di frutti di mare della nostra cucina", en: "A seafood platter from our kitchen" }),
+        img("assets/photos/eden-cocktail.jpg", { it: "Un cocktail al bar", en: "A cocktail at the bar" }),
+        img("assets/photos/eden-wood-fire.jpg", { it: "Cucina creola sul fuoco a legna", en: "Creole cooking over a wood fire" }),
+        img("assets/photos/eden-diving-pool.jpg", { it: "Prova di immersione in piscina", en: "A try-dive in the pool" }),
         img("assets/photos/eden-superior-room.jpg", { it: "Camera doppia con cuscini decorati", en: "Double room with decorative cushions" }),
         img("assets/photos/eden-lobster.jpg", { it: "Aragosta, dalla nostra cucina", en: "Lobster from our kitchen" }),
         img("1634972312739-d7237018e06a", { it: "Una spiaggia di Mauritius", en: "A beach in Mauritius" }),
@@ -233,9 +243,9 @@ window.SITE = {
     note: { it: "Proposta di nuovo sito per Eden Villa, a cura di WebLuxe. Prezzi e disponibilità sono di esempio.", en: "New website proposal for Eden Villa by WebLuxe. Prices and availability are samples." },
     studioWhatsapp: "",
     tiers: [
-      { label: { it: "Essenziale", en: "Essentials" }, url: "https://webluxe.github.io/LowTier_EdenVilla/", current: true },
-      { label: { it: "Soggiorni", en: "Stays" }, url: "https://webluxe.github.io/MidTier_EdenVilla/" },
-      { label: { it: "Prenotazioni", en: "Bookings" }, url: "https://webluxe.github.io/HighTier_EdenVilla/" },
+      { label: { it: "Low Tier", en: "Low Tier" }, url: "https://webluxe.github.io/LowTier_EdenVilla/", current: true },
+      { label: { it: "Mid Tier", en: "Mid Tier" }, url: "https://webluxe.github.io/MidTier_EdenVilla/" },
+      { label: { it: "High Tier", en: "High Tier" }, url: "https://webluxe.github.io/HighTier_EdenVilla/" },
     ],
   },
 

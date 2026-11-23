@@ -7,7 +7,7 @@
 This build is the **Low tier (Villa Essentials)** proposal for Eden Villa, Belle Mare. English by default, Italian one tap away, prices in euros. Facts come from the old site edentourltd.com; everything marked `CONFIRM` or `ESEMPIO / SAMPLE` in `config.js` must be checked with the client before launch:
 
 - room types and prices (the old site lists none; these are samples), the half-board price, the deposit and check-in times
-- that +39 347 844 2855 has WhatsApp; the map pin; the Google Business profile and review link
+- WhatsApp is +230 5742 5328 (from the Facebook page), phone +39 347 844 2855; the map pin; the Google Business profile and review link
 - reviews: one quote is kept from the old site; copy 3 to 6 real ones from Booking.com or TripAdvisor and check the current 8.4 score
 - the final address (`seo.siteUrl`, `sitemap.xml`, `robots.txt`; set to edentourltd.com)
 - new photos of the pool, rooms and restaurant would lift the site more than anything else (9 photos were kept from the old site)
